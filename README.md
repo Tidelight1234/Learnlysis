@@ -1,4 +1,6 @@
-# Learnlysis — PySide6 v5
+# Learnlysis
+
+## PySide6 v5
 
 This repository publishes **only the PySide6 v5 version** of Learnlysis. The PyQt5 version, PySide6 v6, text coder/trainer projects, local Python environments, build intermediates, and personal runtime data are excluded by `.gitignore`.
 
