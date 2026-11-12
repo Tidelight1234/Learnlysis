@@ -33,7 +33,7 @@ Build-only dependencies are listed in `requirements-build.txt`.
 
 ## Windows release
 
-A ready-to-run Windows onedir build is available in `v5/dist/Learnlysis/`. Run `Learnlysis.exe` and keep the neighboring `_internal` directory and license files together with it. The published package includes the Qt/PySide6 runtime and is larger than the source-only repository.
+A ready-to-run Windows onedir build is available in `v5/dist/Learnlysis/`. Run `Learnlysis.exe` and keep the neighboring `_internal` directory and license files together with it. The published package includes the Qt/PySide6 runtime and is larger than the source-only repository. ZIP archives in `v5/dist/` are excluded from Git; publish them as GitHub Release assets.
 
 ## Project layout
 
@@ -90,7 +90,7 @@ python -m venv .venv
 
 ## Windows 程序包
 
-可直接运行的 Windows onedir 程序位于 `v5/dist/Learnlysis/`。启动 `Learnlysis.exe` 时，请保留旁边的 `_internal` 目录和许可文件。程序包包含 Qt/PySide6 运行库，可以独立于源码仓库分发。
+可直接运行的 Windows onedir 程序位于 `v5/dist/Learnlysis/`。启动 `Learnlysis.exe` 时，请保留旁边的 `_internal` 目录和许可文件。程序包包含 Qt/PySide6 运行库，可以独立于源码仓库分发。`v5/dist/` 中的 ZIP 压缩包不纳入 Git，应作为 GitHub Release 附件发布。
 
 ## 项目结构
 
