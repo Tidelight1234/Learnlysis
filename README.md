@@ -40,6 +40,22 @@ The optional video-frame backend can be installed with:
 
 Build-only dependencies are listed in `requirements-build.txt`.
 
+## Run from source (macOS)
+
+Install Python 3.11, then open Terminal in the repository root and run:
+
+```bash
+python3.11 -m venv v5/.mac-build-venv
+v5/.mac-build-venv/bin/python -m pip install -r requirements.txt
+bash v5/platform/mac/run.command
+```
+
+After setup, rerun the last command to launch Learnlysis. To enable optional video frame extraction for AI-assisted coding, install:
+
+```bash
+v5/.mac-build-venv/bin/python -m pip install -r requirements-ai.txt
+```
+
 ## Project layout
 
 ```text
@@ -104,6 +120,22 @@ python -m venv .venv
 ```
 
 打包所需的依赖列在 `requirements-build.txt` 中。
+
+## 从源码启动（macOS）
+
+安装 Python 3.11 后，在终端进入仓库根目录并运行：
+
+```bash
+python3.11 -m venv v5/.mac-build-venv
+v5/.mac-build-venv/bin/python -m pip install -r requirements.txt
+bash v5/platform/mac/run.command
+```
+
+完成首次配置后，再次启动只需运行最后一条命令。如需使用 AI 辅助编码的视频抽帧功能，可安装可选依赖：
+
+```bash
+v5/.mac-build-venv/bin/python -m pip install -r requirements-ai.txt
+```
 
 ## 项目结构
 
