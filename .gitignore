@@ -12,8 +12,6 @@
 !THIRD_PARTY_LICENSES/**
 !v5/
 !v5/**
-!publish_v5.ps1
-!publish_v5.bat
 
 # Never publish local environments, generated build trees, caches, or user data.
 **/.venv/

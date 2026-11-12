@@ -24,8 +24,3 @@ The ready-to-run onedir package is in `v5/dist/Learnlysis/`. Launch `Learnlysis.
 
 Learnlysis original code is licensed under the MIT License; see [LICENSE](LICENSE). Third-party libraries, Qt/PySide6, Python, fonts, and other bundled material remain under their own licenses; see [NOTICE](NOTICE), `LGPL-3.0.txt`, `LGPL-2.1.txt`, `PYTHON-LICENSE.txt`, and `THIRD_PARTY_LICENSES/`. The Windows release also carries these materials beside the executable. The Qt/PySide6 and FFmpeg source retrieval information and replacement rights are described in `NOTICE`.
 
-## Publish updates to GitHub
-
-Run `publish_v5.bat` to open the small Windows publishing window. It stages only files allowed by `.gitignore`, uses the account/repository and commit identity you enter, creates a commit, and opens a terminal for `git push` so Git Credential Manager can authenticate. The window never stores a password or token.
-
-Before the first push, create an empty public repository under the intended GitHub account. If Windows Git Credential Manager still uses the old account, remove the saved `github.com` credential in Windows Credential Manager and sign in to the intended account when prompted. Do not paste a token into the publishing window.
