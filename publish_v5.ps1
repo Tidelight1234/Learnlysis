@@ -5,7 +5,7 @@ $repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location -LiteralPath $repoRoot
 
 if ($PushOnly) {
-    & git push -u origin main
+    & git -c "safe.directory=$repoRoot" push -u origin main
     if ($LASTEXITCODE -ne 0) {
         Write-Host "`n上传未完成。请检查上方 GitHub 登录提示、远端仓库地址和账号权限。" -ForegroundColor Red
     } else {
@@ -118,33 +118,33 @@ $uploadButton.Add_Click({
         Push-Location -LiteralPath $repoRoot
         $locationPushed = $true
         if (-not (Test-Path (Join-Path $repoRoot '.git'))) {
-            & git init -b main 2>&1 | ForEach-Object { $logBox.AppendText("`r`n$_") }
+            & git -c "safe.directory=$repoRoot" init -b main 2>&1 | ForEach-Object { $logBox.AppendText("`r`n$_") }
             if ($LASTEXITCODE -ne 0) { throw '初始化本地仓库失败。' }
         }
-        & git branch -M main 2>&1 | ForEach-Object { $logBox.AppendText("`r`n$_") }
+        & git -c "safe.directory=$repoRoot" branch -M main 2>&1 | ForEach-Object { $logBox.AppendText("`r`n$_") }
         if ($LASTEXITCODE -ne 0) { throw '设置 main 分支失败。' }
-        & git config --local user.name $author
+        & git -c "safe.directory=$repoRoot" config --local user.name $author
         if ($LASTEXITCODE -ne 0) { throw '设置本地提交署名失败。' }
-        & git config --local user.email $email
+        & git -c "safe.directory=$repoRoot" config --local user.email $email
         if ($LASTEXITCODE -ne 0) { throw '设置本地提交邮箱失败。' }
 
         $remoteUrl = "https://github.com/$owner/$repo.git"
-        & git remote get-url origin *> $null
+        & git -c "safe.directory=$repoRoot" remote get-url origin *> $null
         if ($LASTEXITCODE -eq 0) {
-            & git remote set-url origin $remoteUrl
+            & git -c "safe.directory=$repoRoot" remote set-url origin $remoteUrl
         } else {
-            & git remote add origin $remoteUrl
+            & git -c "safe.directory=$repoRoot" remote add origin $remoteUrl
         }
         if ($LASTEXITCODE -ne 0) { throw '设置 GitHub 远端地址失败。' }
 
-        & git add -A
+        & git -c "safe.directory=$repoRoot" add -A
         if ($LASTEXITCODE -ne 0) { throw '整理上传文件失败。' }
-        & git diff --cached --quiet
+        & git -c "safe.directory=$repoRoot" diff --cached --quiet
         $hasChanges = ($LASTEXITCODE -eq 1)
         if ($LASTEXITCODE -gt 1) { throw '检查待提交文件失败。' }
         if ($hasChanges) {
             if (-not $message) { $message = '更新 PySide6 v5' }
-            & git commit -m $message 2>&1 | ForEach-Object { $logBox.AppendText("`r`n$_") }
+            & git -c "safe.directory=$repoRoot" commit -m $message 2>&1 | ForEach-Object { $logBox.AppendText("`r`n$_") }
             if ($LASTEXITCODE -ne 0) { throw '创建 Git 提交失败。' }
         } else {
             $logBox.AppendText("`r`n本地文件没有新改动，将直接推送现有提交。")
