@@ -1,6 +1,6 @@
 # Learnlysis
 
-**PySide6 v5 · Collaborative Learning Behavior Coding and Analysis**
+**Collaborative Learning Behavior Coding and Analysis**
 
 Learnlysis is a desktop application for coding and analyzing collaborative learning behavior from video. It supports frame-based individual coding, group interaction event logging, data summaries, and a collection of descriptive and sequence analysis methods. Optional AI features provide coding suggestions for human review.
 
@@ -65,7 +65,7 @@ Learnlysis original code is licensed under the MIT License; see [LICENSE](LICENS
 
 # Learnlysis（中文）
 
-**PySide6 v5 · 协作学习行为编码与分析工具**
+**协作学习行为编码与分析工具**
 
 Learnlysis 是一款用于协作学习行为编码与分析的桌面软件。它支持导入视频并逐帧记录个体行为、录入小组交互事件、汇总数据，并提供描述统计和序列模式分析。可选 AI 功能用于生成待人工确认的编码建议。
 
