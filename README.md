@@ -20,7 +20,7 @@ Learnlysis is a desktop application for coding and analyzing collaborative learn
 | Windows x64 | [Learnlysis-v5.1.0-windows-x64.zip](https://github.com/Tidelight1234/Learnlysis/releases/download/v5.1.0/Learnlysis-v5.1.0-windows-x64.zip) | Run `Learnlysis.exe` and keep `_internal/` and the bundled license files alongside it. |
 | macOS Apple Silicon (arm64) | [Learnlysis-v5.1.0-macos-arm64.zip](https://github.com/Tidelight1234/Learnlysis/releases/download/v5.1.0/Learnlysis-v5.1.0-macos-arm64.zip) | Double-click `Learnlysis-v5.app`. |
 
-See the [v5.1.0 release notes](https://github.com/Tidelight1234/Learnlysis/releases/tag/v5.1.0) for SHA-256 checksums.
+
 
 ## Run from source (Windows)
 
@@ -49,6 +49,7 @@ THIRD_PARTY_LICENSES/      Third-party license texts and font agreement
 requirements*.txt          Runtime, AI, and build dependencies
 v5/src/                    Application and analysis source
 v5/platform/win/           Windows run and packaging scripts
+v5/platform/mac/           macOS run and packaging scripts
 v5/dist/Windows/          Windows onedir application package
 v5/dist/Macos/            macOS onedir application package
 v5/dist/                  Distribution licenses and notices
@@ -113,6 +114,7 @@ THIRD_PARTY_LICENSES/      第三方许可证文本和字体授权协议
 requirements*.txt          运行、AI 和打包依赖
 v5/src/                    应用程序与分析源码
 v5/platform/win/           Windows 启动与打包脚本
+v5/platform/mac/           macOS 启动与打包脚本
 v5/dist/Windows/          Windows onedir 程序包
 v5/dist/Macos/            macOS onedir 程序包
 v5/dist/                  分发包的许可证和第三方声明
