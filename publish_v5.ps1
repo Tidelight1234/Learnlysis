@@ -1,4 +1,4 @@
-param([switch]$PushOnly)
+﻿param([switch]$PushOnly)
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
