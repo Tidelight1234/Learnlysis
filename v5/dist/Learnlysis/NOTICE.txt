@@ -1,0 +1,78 @@
+# Learnlysis third-party software notices
+
+Learnlysis's original code is licensed under the MIT License; see `LICENSE`.
+This license does not replace the terms for third-party software, fonts, or
+other assets included in the source tree or the release package.
+
+## Included release: PySide6 v5 Windows onedir
+
+The inspected package was built with PySide6 / Qt 6.8.3 and Python 3.11.3.
+The Qt libraries and PySide6/shiboken6 bindings in this package are distributed
+under the LGPLv3 option where that option is available. The LGPLv3 text is
+included as `LGPL-3.0.txt`; the FFmpeg libraries used by Qt Multimedia have
+LGPL-2.1-or-later terms, with the LGPL-2.1 text included as `LGPL-2.1.txt`.
+
+The onedir package keeps the Qt DLLs and Python bindings as separate files under
+`_internal`, so users can replace (替换) those libraries. Learnlysis application code
+is MIT-licensed. This release's corresponding source for the unmodified Qt 6.8.3
+libraries and PySide6 6.8.3 bindings is available to recipients from the official
+[Qt 6.8.3 source archive](https://download.qt.io/archive/qt/6.8/6.8.3/single/) and
+[PySide6 6.8.3 source archive](https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.8.3-src/).
+These locations are source retrieval instructions for this binary release. If a
+distributed Qt/PySide library is modified, the corresponding modified source must
+also be made available under its applicable license. Keep this onedir layout and
+the ability to replace the shared libraries when redistributing the application.
+If these libraries are modified, provide the corresponding modified source as
+required by the applicable license. This notice is not a substitute for checking
+the exact LGPL conditions for the release and distribution method.
+
+The inspected build contained Qt Core, Gui, Multimedia, Network, OpenGL, PDF,
+QML/Quick, SVG, Widgets and related plugins. Qt PDF and Qt Multimedia have an
+LGPLv3 licensing option; this distribution uses that option. Qt Virtual Keyboard
+is GPLv3-only (not LGPL; no commercial Qt license is used here) in the community edition and is not used by Learnlysis; its DLL
+and plugin are excluded from this release. Do not re-add them to a build under
+the MIT/LGPL release configuration. Qt's full component license details are in
+the official [Qt 6.8 licensing page](https://doc.qt.io/qt-6.8/licensing.html).
+
+Qt Multimedia bundles FFmpeg 7.1 libraries. FFmpeg and the other third-party
+components within Qt modules have their own licenses and notices. Consult the
+official [Qt 6.8 third-party license inventory](https://doc.qt.io/qt-6.8/licenses-used-in-qt.html),
+[Qt Multimedia licensing and attribution](https://doc.qt.io/qt-6.8/qtmultimedia-index.html),
+and [Qt for Python third-party licenses](https://doc.qt.io/qtforpython-6.8/licenses.html).
+The package's `THIRD_PARTY_LICENSES` directory includes license texts available
+from the bundled Python distributions, including OpenCV's third-party notices.
+
+## MiSans fonts
+
+The v5/v6 source and v5 package contain MiSans font files from Xiaomi. They are
+not licensed under SIL OFL. The applicable terms are Xiaomi's MiSans Font
+Intellectual Property License Agreement, included in
+`THIRD_PARTY_LICENSES/MiSans-License-Agreement.pdf`. The agreement permits use
+in applications, requires the software to identify MiSans, and requires the
+copyright notice and agreement to be retained with font copies. It also
+prohibits distributing the font files separately. The About dialog identifies
+MiSans as the interface font; do not publish the font files as a standalone font
+download. See the [official MiSans license](https://hyperos.mi.com/font/en/download/).
+
+## Other bundled Python/runtime components
+
+The release also includes Python 3.11.3 (Python Software Foundation License),
+pandas (BSD 3-Clause), NumPy (BSD 3-Clause), SciPy (BSD 3-Clause), scikit-learn
+(BSD 3-Clause), matplotlib (PSF-based license and third-party notices),
+openpyxl (MIT), hmmlearn (MIT), NetworkX (BSD 3-Clause), joblib (BSD 3-Clause),
+OpenCV (Apache-2.0 and its included third-party licenses), and transitive
+dependencies. OpenSSL runtime libraries are also included: the 1.1.x libraries
+use the OpenSSL/SSLeay license and the 3.x libraries use Apache-2.0. Their license texts are included where available in
+`THIRD_PARTY_LICENSES`; Python's license is `PYTHON-LICENSE.txt`.
+
+The Microsoft Visual C++ runtime DLLs included in the package remain subject to
+Microsoft's applicable redistribution terms.
+
+Build tools include PyInstaller (GPLv2 with an exception for generated
+executables) and Cython (Apache-2.0). Their licenses do not change the licenses
+of the application or the runtime components.
+
+Always retain the license files and copyright notices that accompany the
+components in a release. Recheck the actual files in every newly built `dist`
+directory before publishing it, since PyInstaller collection can change which
+plugins and dependencies are present.

@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+# 同 requirements.txt：pip 无 BOM 时按 locale 解码，中文注释必须靠这行 cookie 才读得开。
+#
+# Learnlysis 打包依赖 —— 只在「把 Python 封成 exe」时需要，运行时一个都用不上。
+#
+# 单独拆一份的理由：pyinstaller 及其依赖（altgraph / pefile / pywin32-ctypes）
+# 装进运行环境毫无意义，混在 requirements.txt 里会让每个只想跑分析的人白下十几 MB。
+#
+# 本地打包（在洁净环境里，别用装着 torch 的 .conda）：
+#     python -m venv .build-venv
+#     .build-venv\Scripts\pip install -r requirements.txt -r requirements-build.txt
+#     cd version\v5
+#     ..\..\.build-venv\Scripts\pyinstaller.exe @piArgs main.py
+#   完整参数表见 .github/workflows/build-windows.yml 的 Build with PyInstaller 步骤，
+#   两边逐字一致，才不会「本地好好的、线上不一样」。
+#
+# GitHub Actions 打包：push 到 main / 打 v* tag / Actions 页手动 Run workflow。
+#
+# cython 是「构建加固 staging」（version/v5/_protect_stage.py）把算法族模块编成
+# .pyd 的那一步，只在发布构建里用，运行时不需要。它还要一个 C 编译器：
+#     Windows → Visual Studio Build Tools（C++ 工作负载）。脚本会自己用 vswhere /
+#     常见目录 glob 找 vcvars64.bat 并只导入 PATH/INCLUDE/LIB，拉不到就降级成
+#     「只剥 docstring + 写水印」，并把原因写进 _ly_manifest.json 的 compile_note。
+#     发布构建（本地与 CI）一律带 --require-compiled，编不出来就当构建失败。
+# 不把 cython 写进 requirements.txt：只想跑分析的人不应该为了打包多装一份编译型包。
+
+pyinstaller>=6.6,<7
+cython>=3.0,<4

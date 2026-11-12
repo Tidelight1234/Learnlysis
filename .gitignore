@@ -1,0 +1,31 @@
+# Publish this repository as PySide6 v5 only. Root-level allowlist is below.
+*
+!.gitignore
+!README.md
+!LICENSE
+!NOTICE
+!LGPL-2.1.txt
+!LGPL-3.0.txt
+!PYTHON-LICENSE.txt
+!requirements*.txt
+!THIRD_PARTY_LICENSES/
+!THIRD_PARTY_LICENSES/**
+!v5/
+!v5/**
+!publish_v5.ps1
+!publish_v5.bat
+
+# Never publish local environments, generated build trees, caches, or user data.
+**/.venv/
+**/.build-venv/
+**/.mac-build-venv/
+**/__pycache__/
+**/.pytest_cache/
+**/_stage/
+**/build/
+**/data/*
+!**/data/.gitkeep
+
+# Include the ready-to-run onedir release, but not its user-created local data.
+v5/dist/Learnlysis/data/
+v5/dist/Learnlysis/data/**

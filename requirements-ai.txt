@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+# ↑ 第 1 行的 coding cookie 是必需的：pip 无 BOM 时按 locale 解码 requirements
+#   （中文 Windows = cp936、GitHub windows-latest = cp1252），本文件的 UTF-8 中文
+#   注释在两种 locale 下都解不开，会直接 UnicodeDecodeError。别删、别挪到第 3 行以后。
+#
+# Learnlysis「AI 辅助编码」的进包可选后端（本地 .build-venv 与 CI 都装这一份）
+#
+# 与其他三份清单的分界：
+#   - requirements.txt          运行时最小集，进包。
+#   - requirements-build.txt    只在打包时需要（pyinstaller），不进包。
+#   - requirements-optional.txt 可选分析后端（torch/xgboost/shap），**永不进包**，
+#                               装进来就会被 PyInstaller 收走、exe 暴涨数百 MB。
+#   - 本文件                    同样是「不装也能跑」的可选后端，但它**刻意打进 exe**：
+#                               「AI 辅助编码」Phase 2 的离线抽帧通道。最终用户机器上
+#                               大概率没有系统 ffmpeg（video_probe 的第二通道），若这里
+#                               也不进包，exe 里的视频抽帧就永远只剩一句降级提示。
+#
+# 缺席语义不变（AGENTS.md 可选后端契约）：本文件没装的机器上，video_probe 的
+# optional_backends() 报 opencv=False，「AI 辅助编码」对话框写明原因与安装命令，
+# 编码 / 分析 / 导出主链路一克不受影响。判定命令：
+#     python -c "import video_probe; print(video_probe.optional_backends())"
+#
+# 体积账：wheel 约 42 MB，解包进 dist 约 +60 MB（含自带 ffmpeg DLL）。这是换取
+# 「exe 用户可用视频抽帧」的明确代价，不是失控——别的项目级大依赖不往这份里塞。
+
+# 离线抽帧（video_probe._extract_opencv：VideoCapture 按毫秒定位读帧，
+# 与直播 QMediaPlayer 完全无关，绝不触碰 WMF/DirectShow 那套陷阱）。
+# 钉的是 .build-venv 实装并过闸门验证的版本（pip freeze 口径是 5.0.0.93，
+# cv2.__version__ 只报 5.0.0——两者不是同一个串，钉版必须用 freeze 那个）；
+# 换大版本要重跑 _smoke_autocode.py。
+opencv-python==5.0.0.93
+
+# Phase 3 的重武器（faster-whisper / mediapipe）**不进这份**：一装就是数百 MB 且
+# 会连累 exe，缺席时 auto_coding_train 诚实降级为纯序列特征训练。见
+# requirements-optional.txt 末尾的注释块。

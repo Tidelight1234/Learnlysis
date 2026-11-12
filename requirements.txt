@@ -1,0 +1,100 @@
+# -*- coding: utf-8 -*-
+#
+# ↑ 第一行这个 coding cookie 不是装饰，删掉就装不上。
+#   pip 读 requirements 时走 auto_decode()：没有 BOM 就回落到
+#   locale.getpreferredencoding()，中文 Windows 是 cp936、GitHub windows-latest
+#   是 cp1252 —— 两者都解不开本文件的 UTF-8 中文注释，直接 UnicodeDecodeError。
+#   pip 只认前两行里 PEP 263 形式的 `coding[:=]\s*([-\w.]+)`，所以它必须在第 1 行
+#   （或第 2 行），且这一行本身必须是纯 ASCII。
+#   同理适用于 requirements-optional.txt / requirements-build.txt。
+#
+# Learnlysis 运行依赖（固定为当前验证通过的版本，别随手升级——见文末「升级须知」）
+#
+# ─────────────────────────────────────────────────────────────────────
+# GUI 骨架
+# ─────────────────────────────────────────────────────────────────────
+
+# 桌面 GUI 框架。PySide6 wheel 自带 Qt 6 与 QtMultimedia 插件。
+PySide6==6.8.3
+
+# ─────────────────────────────────────────────────────────────────────
+# 数据装载与 I/O
+# ─────────────────────────────────────────────────────────────────────
+
+# 长表 Student×Time×Dimension×Code 的统一数据模型（CodingDataset），
+# 以及 analysis_core 的 GroupBundle 装载、所有导出层。
+pandas==2.2.3
+
+# Excel 读写：data_encoder / interaction_model / summary_tab 直接 import，
+# pandas 的 read_excel/to_excel 也靠它当引擎。
+openpyxl==3.1.5
+
+# ─────────────────────────────────────────────────────────────────────
+# 数值与统计内核
+# ─────────────────────────────────────────────────────────────────────
+
+# 全部距离矩阵、熵、转移概率的底层数组。
+numpy==2.2.5
+
+# 层次聚类树状图（IND07）、统计检验与分布（GRP05 / GRP09 的卡方与 Z 检验）。
+scipy==1.15.3
+
+# 层次聚类 / k-medoids 初始化 / 随机森林与 HistGradientBoosting（IND12）/
+# silhouette（IND07）/ permutation_importance（IND12 特征重要性，口径固定不走 shap）。
+scikit-learn==1.6.1
+
+# 「AI 辅助编码」本地训练（auto_coding_train 顶层直接 import joblib 存模型）。
+# 之前它靠 scikit-learn 的传递依赖在场——能跑，但违反「直接 import 必须显式列」：
+# 哪天 sklearn 换掉 joblib 依赖，断裂要等到用户在 exe 里点开训练弹窗才暴露。
+# 版本钉的是 .build-venv 里随 sklearn 1.6.1 实装、闸门验证过的这个。
+joblib==1.6.0
+
+# 图指标统一后端：IND10 共现网络 ENA、IND11 有向时序网络 ONA、
+# GRP07 角色发现、GRP08 交互网络 SNA（degree / density / reciprocity）。
+networkx==3.6.1
+
+# IND08 隐马尔可夫模型（单维 HMM 与多维 MHMM）。
+hmmlearn==0.3.3
+
+# 「统计及可视化」M01–M19 与 IND/GRP 全部方法的绘图层。
+# ⚠️ 锁 3.10.0 是硬约束：analysis_plots._row_of() 依赖
+#    SubplotSpec.get_geometry() 返回 (n_rows, n_cols, start, stop)，
+#    换版本若改了返回序，逐行高度记账会整批失效（详见 AGENTS.md 图形层一节）。
+matplotlib==3.10.0
+
+# ─────────────────────────────────────────────────────────────────────
+# 开发/测试依赖
+# ─────────────────────────────────────────────────────────────────────
+
+# conftest.py + 5 个 test_*.py。留在主清单里是刻意的：AGENTS.md 承诺
+# `pip install -r requirements.txt` 之后 `pytest -v` 直接能跑，不用再装第二份。
+pytest>=8.0
+
+# ─────────────────────────────────────────────────────────────────────
+# 刻意「不在」这份清单里的东西（别当成漏了）
+# ─────────────────────────────────────────────────────────────────────
+#   torch / xgboost / shap  → requirements-optional.txt（可选分析后端，
+#                             缺席时 IND13–IND15 阻断、GRP10 跳过 DeepSets、
+#                             IND12 剔除 XGBoost 选项，都不报错）
+#   opencv-python           → requirements-ai.txt（同样是可选后端，但它**打进 exe**：
+#                             「AI 辅助编码」的离线抽帧通道，见该文件顶注的分界说明）
+#   pyinstaller             → requirements-build.txt（只在打包时需要，
+#                             运行时一克都用不上）
+#   R / Rscript             → 不是 pip 依赖，交叉校验层探测本机安装，
+#                             装包入口 version/v5/r_refs/setup_r_reference.R
+#   tslearn / arules / mlxtend / scikit-learn-extra
+#                           → DTW、PrefixSpan、k-medoids(PAM) 全是纯 Python
+#                             自实现，不引这些编译型依赖
+#
+# ─────────────────────────────────────────────────────────────────────
+# 升级须知
+# ─────────────────────────────────────────────────────────────────────
+# 每个版本号都是「本机跑通 pytest -v + 四个 _smoke_*.py」之后钉下来的。
+# 要升级请在 .build-venv 里单独试，并至少跑：
+#     cd version/v5
+#     pytest -v
+#     python -X utf8 _smoke_analysis.py     # M01–M19 口径回归
+#     python -X utf8 _smoke_modes.py        # IND/GRP 逐方法（需先 _gen_testdata.py）
+# 改 matplotlib / numpy / scipy 时额外跑 pytest test_analysis_plots.py -v
+# 与 _smoke_layout.py —— 量尺与几何断言对这三个最敏感。
+

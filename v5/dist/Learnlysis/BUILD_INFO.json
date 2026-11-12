@@ -1,0 +1,39 @@
+{
+  "build_id": "5.1.0+20261112-nogit",
+  "build_time": "2026-11-12T02:35:32Z",
+  "git_commit": "nogit",
+  "version": "5.1.0",
+  "app_name": "Learnlysis",
+  "hardening": "docstrings=stripped;compiled=analysis_stats_sequence,analysis_stats_group,analysis_stats_network,analysis_features,interaction_model,secure_store,integrity,build_stamp",
+  "compiler": "vcvars=D:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC",
+  "copied_files": 86,
+  "python": "3.11.3",
+  "strip": {
+    "py_files": 55,
+    "files_stripped": 55,
+    "docstrings_left": 0,
+    "ast_unreadable": 0
+  },
+  "compiled": [
+    "analysis_stats_sequence",
+    "analysis_stats_group",
+    "analysis_stats_network",
+    "analysis_features",
+    "interaction_model",
+    "secure_store",
+    "integrity",
+    "build_stamp"
+  ],
+  "compiled_files": [
+    "analysis_stats_sequence.cp311-win_amd64.pyd",
+    "analysis_stats_group.cp311-win_amd64.pyd",
+    "analysis_stats_network.cp311-win_amd64.pyd",
+    "analysis_features.cp311-win_amd64.pyd",
+    "interaction_model.cp311-win_amd64.pyd",
+    "secure_store.cp311-win_amd64.pyd",
+    "integrity.cp311-win_amd64.pyd",
+    "build_stamp.cp311-win_amd64.pyd"
+  ],
+  "version_info": "_ly_version_info.txt",
+  "compile_note": ""
+}
