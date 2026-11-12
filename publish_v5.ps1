@@ -45,9 +45,9 @@ function Add-TextBox($x, $y, $width, $value = '') {
 }
 
 Add-Label 'GitHub 账号（仓库所有者）' 20 20 190 | Out-Null
-$ownerBox = Add-TextBox 220 18 390
+$ownerBox = Add-TextBox 220 18 390 'Tidelight1234'
 Add-Label '仓库名称' 20 58 190 | Out-Null
-$repoBox = Add-TextBox 220 56 390 'Learnlysis-PySide6-v5'
+$repoBox = Add-TextBox 220 56 390 'Learnlysis'
 Add-Label '提交署名' 20 96 190 | Out-Null
 $nameBox = Add-TextBox 220 94 390
 Add-Label '提交邮箱（建议 GitHub noreply 邮箱）' 20 134 190 | Out-Null
